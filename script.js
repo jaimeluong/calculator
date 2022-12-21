@@ -12,27 +12,33 @@ let operator; // Chosen operator
 // Flag to determine if the first operand or second operand is being typed in
 let first = true;
 
+// Toggle flag, to accept first operand or second operand
+const toggle = () => {
+    first = !first;
+}
+
 // Operator buttons
 const plusButton = document.querySelector('#plus');
 const minusButton = document.querySelector('#minus');
 const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
+const equalButton = document.querySelector('#equal');
 
 // Add event listeners to operator buttons
 plusButton.addEventListener('click', () => {
-    first = !first; // Toggle to accept first operand or second operand
+    toggle();
     operator = 'add'; // Set operator to addition
 });
 minusButton.addEventListener('click', () => {
-    first = !first; // Toggle to accept first operand or second operand
+    toggle();
     operator = 'subtract'; // Set operator to addition
 });
 multiplyButton.addEventListener('click', () => {
-    first = !first; // Toggle to accept first operand or second operand
+    toggle();
     operator = 'multiply'; // Set operator to addition
 });
 divideButton.addEventListener('click', () => {
-    first = !first; // Toggle to accept first operand or second operand
+    toggle();
     operator = 'divide'; // Set operator to addition
 });
 
@@ -56,16 +62,47 @@ function build(digitButton, index) { // Give an event listener that appends the 
     });
 }
 
-// Operate function will perform calculation
-const operate = (numOne, numTwo, operator) => {
-    return operator(numOne, numTwo);
+// Operator functions
+const addition = (num1, num2) => {
+    return num1 + num2;
+}
+const subtraction = (num1, num2) => {
+    return num1 - num2;
+}
+const multiplication = (num1, num2) => {
+    return num1 * num2;
+}
+const division = (num1, num2) => {
+    if(num1 / num2 === Infinity) {
+        return 'ERROR!';
+    } else {
+        return num1 / num2;
+    }
 }
 
-// // Debugging
-// const equal = document.querySelector('#equal');
-// equal.addEventListener('click', () => {
-//     console.log(firstOperand);
-//     console.log(secondOperand);
-//     console.log(operator);
-//     console.log(first);
-// });
+// Add event listener to equal button, will perform calculation
+equalButton.addEventListener('click', () => {
+    if(operator === 'add') {
+        display.textContent = addition(firstOperand.join(''), secondOperand.join(''));
+    } else if(operator === 'subtract') {
+        display.textContent = subtraction(firstOperand.join(''), secondOperand.join(''));
+    } else if(operator === 'multiply') {
+        display.textContent = multiplication(firstOperand.join(''), secondOperand.join(''));
+    } else {
+        display.textContent = division(firstOperand.join(''), secondOperand.join(''));
+    }
+});
+
+// // Operate function will perform calculation
+// const operate = (num1, num2, operator) => {
+//     return operator(num1, num2);
+// }
+
+// Debugging, using clear button for now...
+const clr = document.querySelector('#clear');
+clr.addEventListener('click', () => {
+    console.log(firstOperand);
+    console.log(secondOperand);
+    console.log(operator);
+    console.log(first);
+});
