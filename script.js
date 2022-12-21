@@ -75,19 +75,19 @@ function build(digitButton, index) { // Give an event listener that appends the 
 
 // Operator functions
 const addition = (num1, num2) => {
-    return parseFloat((num1 + num2).toFixed(3));
+    return parseFloat((num1 + num2).toFixed(5));
 }
 const subtraction = (num1, num2) => {
-    return parseFloat((num1 - num2).toFixed(3));
+    return parseFloat((num1 - num2).toFixed(5));
 }
 const multiplication = (num1, num2) => {
-    return parseFloat((num1 * num2).toFixed(3));
+    return parseFloat((num1 * num2).toFixed(5));
 }
 const division = (num1, num2) => {
     if(num1 / num2 === Infinity) {
         return 'ERROR!';
     } else {
-        return parseFloat((num1 / num2).toFixed(3));
+        return parseFloat((num1 / num2).toFixed(5));
     }
 }
 
@@ -130,10 +130,10 @@ clearButton.addEventListener('click', () => {
     display.textContent = '';
 })
 
-// Debugging purposes only
-addEventListener('keydown', () => {
-    console.log(firstOperand);
-    console.log(secondOperand);
-    console.log(operator);
-    console.log(first);
-});
+// // Debugging purposes only
+// addEventListener('keydown', () => {
+//     console.log(firstOperand);
+//     console.log(secondOperand);
+//     console.log(operator);
+//     console.log(first);
+// });
