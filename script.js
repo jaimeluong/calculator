@@ -1,103 +1,67 @@
-// Input array to catch first number, operator, and second number
-let input = [];
+// Nodelist of 10 digits, 1-0
+const digits = document.querySelectorAll('.digit');
 
-// Buttons nodelist
-const buttons = document.querySelectorAll('.btn');
-// 0,1,2,3 = add, subtract, multiply, divide
-// 4,5,6,7 = 1, 2, 3, equal
-// 8,9,10,11 = 4, 5, 6, clear
-// 12,13,14,15 = 7, 8, 9, 0
+// Display text
+let display = document.querySelector('.display');
 
-// Display element
-const display = document.querySelector('.display');
+// Global variables to capture number input and chosen operator
+let firstOperand = []; // First number
+let secondOperand = []; // Second number
+let operator; // Chosen operator
 
-// Digit buttons
-buttons[4].addEventListener('click', () => { // 1
-    input.push(1);
-    display.textContent = input.join('');
+// Flag to determine if the first operand or second operand is being typed in
+let first = true;
+
+// Operator buttons
+const plusButton = document.querySelector('#plus');
+const minusButton = document.querySelector('#minus');
+const multiplyButton = document.querySelector('#multiply');
+const divideButton = document.querySelector('#divide');
+
+// Add event listeners to operator buttons
+plusButton.addEventListener('click', () => {
+    first = !first; // Toggle to accept first operand or second operand
+    operator = 'add'; // Set operator to addition
 });
-buttons[5].addEventListener('click', () => { // 2
-    input.push(2);
-    display.textContent = input.join('');
+minusButton.addEventListener('click', () => {
+    first = !first; // Toggle to accept first operand or second operand
+    operator = 'subtract'; // Set operator to addition
 });
-buttons[6].addEventListener('click', () => { // 3
-    input.push(3);
-    display.textContent = input.join('');
+multiplyButton.addEventListener('click', () => {
+    first = !first; // Toggle to accept first operand or second operand
+    operator = 'multiply'; // Set operator to addition
 });
-buttons[8].addEventListener('click', () => { // 4
-    input.push(4);
-    display.textContent = input.join('');
-});
-buttons[9].addEventListener('click', () => { // 5
-    input.push(5);
-    display.textContent = input.join('');
-});
-buttons[10].addEventListener('click', () => { // 6
-    input.push(6);
-    display.textContent = input.join('');
-});
-buttons[12].addEventListener('click', () => { // 7
-    input.push(7);
-    display.textContent = input.join('');
-});
-buttons[13].addEventListener('click', () => { // 8
-    input.push(8);
-    display.textContent = input.join('');
-});
-buttons[14].addEventListener('click', () => { // 9
-    input.push(9);
-    display.textContent = input.join('');
-});
-buttons[15].addEventListener('click', () => { // 0
-    input.push(0);
-    display.textContent = input.join('');
+divideButton.addEventListener('click', () => {
+    first = !first; // Toggle to accept first operand or second operand
+    operator = 'divide'; // Set operator to addition
 });
 
-// Add button
-buttons[0].addEventListener('click', () => {
-    //input.push('add');
-});
-
-// Subtract button
-buttons[1].addEventListener('click', () => {
-    //input.push('subtract');
-});
-
-// Multiply button
-buttons[2].addEventListener('click', () => {
-    //input.push('multiply');
-});
-
-// Divide button
-buttons[3].addEventListener('click', () => {
-    //input.push('divide');
-});
-
-// Add function
-const add = (num1, num2) => {
-    return num1 + num2;
+// Add event listers to each digit button
+digits.forEach(build); // Call a build function on each digit button
+function build(digitButton, index) { // Give an event listener that appends the correct digit
+    digitButton.addEventListener('click', () => {
+        if(first && index !== 9) {
+            firstOperand.push(index+1);
+        } else if(first && index === 9) {
+            firstOperand.push(0);
+        } else if(!first && index !== 9) {
+            secondOperand.push(index+1);
+        } else {
+            secondOperand.push(0);
+        }
+    });
 }
 
-// Subtract function
-const subtract = (num1, num2) => {
-    return num1 - num2;
+// Operate function will perform calculation
+const operate = (numOne, numTwo, operator) => {
+    return operator(numOne, numTwo);
 }
 
-// Multiply function
-const multiply = (num1, num2) => {
-    return num1 * num2;
-}
-
-// Divide function
-const divide = (num1, num2) => {
-    if(num2 !== 0) {
-        return num1 / num2;
-    } else {
-        return 'ERROR!';
-    }
-}
-
-// Operate function to be called when equal button is clicked
-const operate = (operator, num1, num2) => {
-
-}
+// // Debugging
+// const equal = document.querySelector('#equal')''
+// equal.addEventListener('click', () => {
+//     console.log(firstOperand);
+//     console.log(secondOperand);
+//     console.log(operator);
+//     console.log(first);
+// });
