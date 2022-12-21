@@ -22,7 +22,10 @@ const plusButton = document.querySelector('#plus');
 const minusButton = document.querySelector('#minus');
 const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
+
+// Equal and clear buttons
 const equalButton = document.querySelector('#equal');
+const clearButton = document.querySelector('#clear');
 
 // Add event listeners to operator buttons
 plusButton.addEventListener('click', () => {
@@ -117,6 +120,15 @@ const operate = (num1, num2, operator) => {
 equalButton.addEventListener('click', () => {
     operate(firstOperand.join(''), secondOperand.join(''), operator);
 });
+
+// Clear calculator when clicked
+clearButton.addEventListener('click', () => {
+    firstOperand = [];
+    secondOperand = [];
+    operator = '';
+    first = true;
+    display.textContent = '';
+})
 
 // Debugging purposes only
 addEventListener('keydown', () => {
