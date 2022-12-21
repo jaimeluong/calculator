@@ -83,7 +83,7 @@ const division = (num1, num2) => {
 // Operate function will perform calculation
 const operate = (num1, num2, operator) => {
     if(operator === 'add') {
-        display.textContent = addition(num1, num2);
+        display.textContent = addition(parseInt(num1), parseInt(num2));
     } else if (operator === 'subtract') {
         display.textContent = subtraction(num1, num2);
     } else if (operator === 'multiply') {
