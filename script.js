@@ -80,23 +80,23 @@ const division = (num1, num2) => {
     }
 }
 
+// Operate function will perform calculation
+const operate = (num1, num2, operator) => {
+    if(operator === 'add') {
+        display.textContent = addition(num1, num2);
+    } else if (operator === 'subtract') {
+        display.textContent = subtraction(num1, num2);
+    } else if (operator === 'multiply') {
+        display.textContent = multiplication(num1, num2);
+    } else {
+        display.textContent = division(num1, num2);
+    }
+}
+
 // Add event listener to equal button, will perform calculation
 equalButton.addEventListener('click', () => {
-    if(operator === 'add') {
-        display.textContent = addition(firstOperand.join(''), secondOperand.join(''));
-    } else if(operator === 'subtract') {
-        display.textContent = subtraction(firstOperand.join(''), secondOperand.join(''));
-    } else if(operator === 'multiply') {
-        display.textContent = multiplication(firstOperand.join(''), secondOperand.join(''));
-    } else {
-        display.textContent = division(firstOperand.join(''), secondOperand.join(''));
-    }
+    operate(firstOperand.join(''), secondOperand.join(''), operator);
 });
-
-// // Operate function will perform calculation
-// const operate = (num1, num2, operator) => {
-//     return operator(num1, num2);
-// }
 
 // Debugging, using clear button for now...
 const clr = document.querySelector('#clear');
