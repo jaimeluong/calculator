@@ -75,19 +75,19 @@ function build(digitButton, index) { // Give an event listener that appends the 
 
 // Operator functions
 const addition = (num1, num2) => {
-    return num1 + num2;
+    return parseFloat((num1 + num2).toFixed(3));
 }
 const subtraction = (num1, num2) => {
-    return num1 - num2;
+    return parseFloat((num1 - num2).toFixed(3));
 }
 const multiplication = (num1, num2) => {
-    return num1 * num2;
+    return parseFloat((num1 * num2).toFixed(3));
 }
 const division = (num1, num2) => {
     if(num1 / num2 === Infinity) {
         return 'ERROR!';
     } else {
-        return num1 / num2;
+        return parseFloat((num1 / num2).toFixed(3));
     }
 }
 
