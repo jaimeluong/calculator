@@ -42,12 +42,16 @@ function build(digitButton, index) { // Give an event listener that appends the 
     digitButton.addEventListener('click', () => {
         if(first && index !== 9) {
             firstOperand.push(index+1);
+            display.textContent = firstOperand.join('');
         } else if(first && index === 9) {
             firstOperand.push(0);
+            display.textContent = firstOperand.join('');
         } else if(!first && index !== 9) {
             secondOperand.push(index+1);
+            display.textContent = secondOperand.join('');
         } else {
             secondOperand.push(0);
+            display.textContent = secondOperand.join('');
         }
     });
 }
@@ -58,7 +62,7 @@ const operate = (numOne, numTwo, operator) => {
 }
 
 // // Debugging
-// const equal = document.querySelector('#equal')''
+// const equal = document.querySelector('#equal');
 // equal.addEventListener('click', () => {
 //     console.log(firstOperand);
 //     console.log(secondOperand);
