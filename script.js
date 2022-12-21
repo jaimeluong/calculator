@@ -1,4 +1,4 @@
-// Nodelist of 10 digits, 1-0
+// Nodelist of 10 digits (1,2,3,4,5,6,7,8,9,0)
 const digits = document.querySelectorAll('.digit');
 
 // Display text
@@ -12,7 +12,7 @@ let operator; // Chosen operator
 // Flag to determine if the first operand or second operand is being typed in
 let first = true;
 
-// Toggle flag, to accept first operand or second operand
+// Toggle flag to accept either first or second operand
 const toggle = () => {
     first = !first;
 }
@@ -29,7 +29,7 @@ const clearButton = document.querySelector('#clear');
 
 // Add event listeners to operator buttons
 plusButton.addEventListener('click', () => {
-    if(first) {
+    if(first) { // Only toggle if it already has not been
         toggle();
     }
     operator = 'add'; // Set operator to addition
@@ -54,16 +54,16 @@ divideButton.addEventListener('click', () => {
 });
 
 // Add event listers to each digit button
-digits.forEach(build); // Call a build function on each digit button
+digits.forEach(build); // Call a build function on each digit button to  build the event listener
 function build(digitButton, index) { // Give an event listener that appends the correct digit
     digitButton.addEventListener('click', () => {
-        if(first && index !== 9) {
+        if(first && index !== 9) { // For numbers 1-9
             firstOperand.push(index+1);
             display.textContent = firstOperand.join('');
-        } else if(first && index === 9) {
+        } else if(first && index === 9) { // Case for digit button 0 (which is last in the nodelist)
             firstOperand.push(0);
             display.textContent = firstOperand.join('');
-        } else if(!first && index !== 9) {
+        } else if(!first && index !== 9) { // Edit the second operand. After subsequent calculations, the first operand is already set.
             secondOperand.push(index+1);
             display.textContent = secondOperand.join('');
         } else {
@@ -75,7 +75,7 @@ function build(digitButton, index) { // Give an event listener that appends the 
 
 // Operator functions
 const addition = (num1, num2) => {
-    return parseFloat((num1 + num2).toFixed(5));
+    return parseFloat((num1 + num2).toFixed(5)); // Remove insignificant trailing zeroes and round to 5 digits
 }
 const subtraction = (num1, num2) => {
     return parseFloat((num1 - num2).toFixed(5));
@@ -84,7 +84,7 @@ const multiplication = (num1, num2) => {
     return parseFloat((num1 * num2).toFixed(5));
 }
 const division = (num1, num2) => {
-    if(num1 / num2 === Infinity) {
+    if(num1 / num2 === Infinity) { // Dividing by zero in JavaScript returns Infinity
         return 'ERROR!';
     } else {
         return parseFloat((num1 / num2).toFixed(5));
@@ -94,26 +94,25 @@ const division = (num1, num2) => {
 // Operate function will perform calculation
 const operate = (num1, num2, operator) => {
     if(operator === 'add') {
-        let result = addition(parseInt(num1), parseInt(num2));
-        display.textContent = result;
-        firstOperand = [result];
-        secondOperand = [];
+        let result = addition(parseInt(num1), parseInt(num2)); // Parse as integer to avoid string concatenation, only happened with addition
+        set(result);
     } else if (operator === 'subtract') {
         let result = subtraction(num1, num2);
-        display.textContent = result;
-        firstOperand = [result];
-        secondOperand = [];
+        set(result);
     } else if (operator === 'multiply') {
         let result = multiplication(num1, num2)
-        display.textContent = result;
-        firstOperand = [result];
-        secondOperand = [];
+        set(result);
     } else {
         let result = division(num1, num2);
-        display.textContent = result;
-        firstOperand = [result];
-        secondOperand = [];
+        set(result);
     }
+}
+
+// Set post-calculation parameters
+const set = (result) => {
+    display.textContent = result;
+    firstOperand = [result];
+    secondOperand = [];
 }
 
 // Add event listener to equal button, will perform calculation
@@ -121,7 +120,7 @@ equalButton.addEventListener('click', () => {
     operate(firstOperand.join(''), secondOperand.join(''), operator);
 });
 
-// Clear calculator when clicked
+// Clear calculator when clicked, reset everything back to original parameters
 clearButton.addEventListener('click', () => {
     firstOperand = [];
     secondOperand = [];
