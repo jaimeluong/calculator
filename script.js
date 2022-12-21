@@ -33,24 +33,28 @@ plusButton.addEventListener('click', () => {
         toggle();
     }
     operator = 'add'; // Set operator to addition
+    plusButton.classList.add('clicked');
 });
 minusButton.addEventListener('click', () => {
     if(first) {
         toggle();
     }
-    operator = 'subtract'; // Set operator to addition
+    operator = 'subtract'; // Set operator to subtraction
+    minusButton.classList.add('clicked');
 });
 multiplyButton.addEventListener('click', () => {
     if(first) {
         toggle();
     }
-    operator = 'multiply'; // Set operator to addition
+    operator = 'multiply'; // Set operator to multiplication
+    multiplyButton.classList.add('clicked');
 });
 divideButton.addEventListener('click', () => {
     if(first) {
         toggle();
     }
-    operator = 'divide'; // Set operator to addition
+    operator = 'divide'; // Set operator to division
+    divideButton.classList.add('clicked');
 });
 
 // Add event listers to each digit button
@@ -118,6 +122,10 @@ const set = (result) => {
 // Add event listener to equal button, will perform calculation
 equalButton.addEventListener('click', () => {
     operate(firstOperand.join(''), secondOperand.join(''), operator);
+    plusButton.classList.remove('clicked');
+    minusButton.classList.remove('clicked');
+    multiplyButton.classList.remove('clicked');
+    divideButton.classList.remove('clicked');
 });
 
 // Clear calculator when clicked, reset everything back to original parameters
