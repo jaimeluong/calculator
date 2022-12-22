@@ -32,6 +32,7 @@ h1, h2 {
     text-align: center;
 }
 
-.clicked { /* Show user which operator they selected */
+/* Show user which operator they selected */
+.clicked {
     background-color: #B8B8C8;
 }
